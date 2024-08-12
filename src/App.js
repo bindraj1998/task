@@ -1,23 +1,35 @@
 import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import LoginForm from './Login';
+import {BrowserRouter as Router, Route, useNavigate, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import Private from './components/Private';
+   
+function App() {   
+  const login=JSON.parse(localStorage.getItem("user"))
+  const navigate=useNavigate()
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+
+        
+  
+         
+       
+       <Routes>
+         <Route path="/" element={<Home/>}/>
+         
+         <Route path="/" element={<Private/>}>
+         <Route path="/signup" element={<LoginForm/>}/>
+         <Route path="/signin" element={<Login/>}/>
+         </Route>
+       
+
+      
+       </Routes>
+
     </div>
   );
 }
